@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Thomas Scott's NESMusicMaker</title>
+	<link href="styles/programstyle.css" rel="stylesheet" type="text/css">
+	
+
+	<!-- custom css for progress bar from: https://jqueryui.com/progressbar/ -->
+	<link rel="stylesheet" href="scripts/jquery-ui-1.13.2.custom/jquery-ui.css">
+
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+</head>
+
+
+<body>
+	
+		<div id="progresstext">
+		<h2>Loading Javascript...</h2>
+		<progress max="100" value="1" id="progressbar">
+		</progress><!-- closing progressbar-->
+	</div><!-- closing progresstext -->
+
+	
+	<h3>Javascript App: NES Music Maker!</h3>
+	
+	<div id="javascript">
+		
+		
+	</div>
+
+</body>
+
+<!-- JS SCRIPTS -->
+
+<!-- JS begins loading, increment progress bar -->
+<script type="text/javascript" src="scripts/beginLoad.js"></script>
+
+
+<!-- Include jQuery! -->
+<script type="text/javascript" src="scripts/jquery.js"></script>
+
+<!-- // This script is from https://jquerypp.com/#cookie -->
+<script type="text/javascript" src="scripts/cookie.js"></script>
+
+
+
+<!-- This script is from https://jqueryui.com/ -->
+<script type="text/javascript" src="scripts/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
+
+<!-- Darkmode script and NESMusicMaker -->
+<script type="text/javascript" src="scripts/darkMode.js"></script>
+<script type="text/javascript" src="scripts/NESMusicMaker.js"></script>
+
+<!-- TODO: This should probably be its own script -->
+<!-- Script to load NES cartridge into Takahirox's emu,
+	based on changes user has made in NESMusicMaker -->
+<script>
+
+/* JSON NOTES HERE:
+
+The JSON works now! Fixed since Unit 7
+
+*/
+
+// These numbers are slightly magical but 
+// are to facilitate JSON into .NES cartridge!
+const tweakHex = 1; // section where we need to modify one hexCode
+const modifyNotes = 3; // section where custom notes are added
+
+// Declare arrays for use with JSON:
+let cartridgeJSONExtraction = [];
+let cartridgeSection = []
+
+// Declare NES Cartridge
+let NESCartridge;
+// Declare what will be NES "file" of cartridge:
+let NESCartridgeFile;
+
+
+
+// courtesy of https://www.youtube.com/shorts/lBXm1n2gq-Q
+// (modified to meet my ends, obviously!)
+fetch("./json/musicInfo.json")
+.then(response => response.json())
+.then(data => showInfo(data));
+
+function showInfo(data) {
+	// Based on code from:
+	// https://www.freecodecamp.org/news/how-to-clone-an-array-in-javascript-1d3183468f6a/
+	// Create a "deep" copy of the array
+	
+	cartridgeJSONExtraction = JSON.parse(JSON.stringify(data.ROMSections));
+	for (let i = 0; i < cartridgeJSONExtraction.length; i++) {
+		cartridgeSection.push(cartridgeJSONExtraction[i].section);
+
+	}
+	continueInit();
+}
+
+
+// The only way I could figure out
+// to continue after JSON download
+// I'm sure there's a better way... but it works!
+
+function continueInit() {
+// This could probably be another kind of element,
+// but I'm not sure it matters.
+var cartridgeDownload = document.createElement("a");
+var NESCartridgeDownload = document.createElement("a");
+
+
+
+
+	// giveNote:
+	// gives the hex for the appropriate
+	// note from NESMusicMaker.
+	// This function shouldn't exist,
+	// but my JSON-fu is lacking at the moment.
+	// (See noteTable above for ideal usage.)
+	function giveNote(note) {
+		switch (note) {
+			case "F2":
+				return "08";
+				break;
+			case "G2":
+				return "0A";
+				break;
+			case "A2":
+				return "0C";
+				break;
+			case "B2":
+				return "0E";
+				break;
+			case "C3":
+				return "0F";
+				break;
+			case "D3":
+				return "11";
+				break;
+			case "E3":
+				return "13";
+				break;
+			case "F3":
+				return "14";
+				break;
+			case "G3":
+				return "16";
+				break;
+			case "A3":
+				return "18";
+				break;
+			case "B3":
+				return "1A";
+				break;
+			case "C4":
+				return "1B";
+				break;
+			case "D4":
+				return "1D";
+				break;
+			case "E4":
+				return "1F";
+				break;
+			case "F4":
+				return "20";
+				break;
+			case "G4":
+				return "22";
+				break;
+			case "A4":
+				return "24";
+				break;
+			case "B4":
+				return "26";
+				break;
+			case "C5":
+				return "27";
+				break;
+			case "D5":
+				return "29";
+				break;
+			case "E5":
+				return "2B";
+				break;
+			case "F5":
+				return "2C";
+				break;
+			case "G5":
+				return "2E";
+				break;
+			default:
+				return "00";
+		}
+	}
+
+
+
+// credit: https://stackoverflow.com/questions/7695450/how-do-i-implement-hex2bin
+function checkHex(n){return/^[0-9A-Fa-f]{1,64}$/.test(n)};
+function Hex2Dec(n){if(!checkHex(n))return 0;return parseInt(n,16).toString(10)}
+
+
+// zeroFill: fills a section of 
+// NES cartridge with zeroes
+function zeroFill(section) {
+
+		let tempSection = cartridgeSection[section];
+		tempSection = tempSection.replace("q", "");
+		tempSection = tempSection.replace("x", "");
+		let tempNum = parseInt(tempSection);
+		tempSection = "";
+		for (let i = 0; i < tempNum; i++) {
+		  tempSection += "0000 0000 0000 0000 0000 0000 0000 0000";
+		}
+		
+		return tempSection;
+}
+
+
+function loadCartridgeContent() {
+
+
+// Get the number of notes from array
+	let noteCount = customSongPitchArray.length;
+	// d2 is 210, d3 is 211, ..., e2 = 226
+	noteCount += 210
+	// represent noteCount as hex
+	noteCount = noteCount.toString(16);
+
+NESCartridge = "";
+NESCartridgeFile = "";
+
+
+
+// Converting JSON to NES Cartridge!
+for (let i = 0; i < cartridgeSection.length; i++){
+
+
+	// Do something with NESCartridge
+	if (i == tweakHex) {
+		// Replace 'eb' in section 2
+		// with relevant amount(d2-e2) 
+		// of notes (d2 = 0, d3 = 1, ..., e2 = 16 )
+		NESCartridge += cartridgeSection[i].replaceAll("eb", noteCount);;
+	} else if (i == modifyNotes) {
+		//console.log("putting all the notes in");
+		// Start by adding the pitches in:
+		// start with "00" to align data properly:
+		let tempDataString = "00";
+		// Add the zero at the end that indicates
+		// end of the song:
+		let tempLengthString = "00";
+		for (let i = 0; i < customSongPitchArray.length; i++){
+			let tempNote = giveNote(customSongPitchArray[i])
+			tempDataString += tempNote;
+			let tempLength = customSongDurationArray[i].toString(16);
+			if (tempLength.length == 1) tempLength = "0" + tempLength;
+			tempLengthString += tempLength;
+		} ///end for loop
+
+		// Add in all the length data:
+		tempDataString += tempLengthString;
+
+		// Each item in array is one 16 bit number;
+		// we need 64 in total, minus two because
+		// the first one is filler, and the first
+		// one after pitches is for end of song:
+		let lengthNeeded = 62 - (customSongPitchArray.length * 2);
+
+		// Loop to zero-fill the rest of the section:
+		for (let i = 0; i < lengthNeeded; i++ ){
+			// Zero-fill
+			tempDataString += "00";
+		} // end for loop
+		
+		// Add zero-fill to cartridgeContent:
+		NESCartridge += tempDataString;
+
+		// Now add the next section of zeroes
+		//console.log("SECTION FIVE/zerofill?");
+		NESCartridge += zeroFill(i);
+
+		
+		
+
+		} // End else if for modifyNotes
+		else if (cartridgeSection[i].indexOf("q") >= 0){
+			//console.log("ZERO FILL");
+			NESCartridge += zeroFill(i);
+		} else {
+			//console.log("not zero fill, not modify notes, not tweaking notes");
+			if (NESCartridge == undefined) {
+				NESCartridge = cartridgeSection[i];
+			} else {
+				NESCartridge += cartridgeSection[i];
+			}
+			
+		}
+} // End for loop for looping through sections (Json->NES)
+
+
+// Now sanitize the cartridge data:
+
+	NESCartridge = NESCartridge.replace("\n", "");
+	NESCartridge = NESCartridge.replace(/\s*/g, "");
+
+
+
+	// match/join functions credit to:
+	// https://stackoverflow.com/questions/53427046/how-to-add-space-between-every-4-characters-in-javascript
+	const space = NESCartridge.match(/.{1,2}/g);
+	NESCartridge = space.join(' ');
+	NESCartridge = NESCartridge.split(" ");
+
+	
+	// credit: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+	NESCartridge = NESCartridge.map((x) => Hex2Dec(x));
+
+
+	// credit: https://stackoverflow.com/questions/34089569/create-arraybuffer-from-array-holding-integers-and-back-again
+	/*Yes, there's a simple way without manually writing a loop (the loop still exists somewhere in background):
+	new Uint16Array([1,2,3]);*/
+	NESCartridge = new Uint8Array(NESCartridge);
+		
+
+	// Create .NES "File" to use in emulator:
+	// Credit: https://stackoverflow.com/questions/70732624/how-to-download-url-from-createobjecturl-and-save-it-in-a-folder
+	// also credit: https://developer.mozilla.org/en-US/docs/Web/API/Blob
+	NESCartridgeFile = new Blob([NESCartridge], {type: "application/octet-stream"})
+	NESCartridgeFile["name"] = "flecker.ROM";
+	NESCartridgeDownload.href = window.URL.createObjectURL(NESCartridgeFile);
+	NESCartridgeDownload.download = "basicsnd.nes";
+
+
+/* Related note:
+ The use of "var" may not be approriate, but
+ it was always based on someone else's examples,
+ and I haven't had time to test "let" in its
+ place, as I've been chasing down more relevant bugs.
+ But they should possibly be changed in the future. */
+
+
+
+	//	Theoeretically, this noteTable should be used below,
+	// but for the moment it is not working, so I am using
+	// a workaround.
+	const noteTable = { "A1":"00", "As1":"01", "Bb1":"01", "B1":"02", "C2":"03", 
+					  "Cs2":"04", "Db2":"04", "D2":"05", "Ds2":"06", "Eb2":"06",
+					  "E2":"07", "F2":"08", "Fs2":"09", "Gb2":"09", "G2":"0A",
+					  "Gs2":"0B", "Ab2":"0B", "A2":"0C", "As2":"0D", "Bb2":"0D",
+					  "B2":"0E", "C3":"0F", "Cs3":"10", "Db3":"10", "D3":"11",
+					  "Ds3":"12", "Eb3":"12", "E3":"13", "F3":"14", "Fs3":"15",
+					  "Gb3":"15", "G3":"16", "Gs3":"17", "Ab3":"17", "A3":"18",
+					  "As3":"19", "Bb3":"19", "B3":"1A", "C4":"1B", "Cs4":"1C",
+					  "Db4":"1C", "D4":"1D", "Ds4":"1E", "Eb4":"1E", "E4":"1F",
+					  "F4":"20", "Fs4":"21", "Gb4":"21", "G4":"22", "Gs4":"23",
+					  "Ab4":"23", "A4":"24", "As4":"25", "Bb4":"25", "B4":"26",
+					  "C5":"27", "Cs5":"28", "Db5":"28", "D5":"29", "Ds5":"2A",
+					  "Eb5":"2A", "E5":"2B", "F5":"2C", "Fs5":"2D", "Gb5":"2D",
+					  "G5":"2E", "Gs5":"2F", "Ab5":"2F", "A5":"30", "As5":"31",
+					  "Bb5":"31", "B5":"32", "C6":"33", "Cs6":"34", "Db6":"34",
+					  "D6":"35", "Ds6":"36", "Eb6":"36", "E6":"37", "F6":"38",
+					  "Fs6":"39", "Gb6":"39", "G6":"3A", "Gs6":"3B", "Ab6":"3B",
+					  "A6":"3C", "As6":"3D", "Bb6":"3D", "B6":"3E", "C7":"3F",
+					  "Cs7":"40", "Db7":"40", "D7":"41", "Ds7":"42", "Eb7":"42",
+					  "E7":"43", "F7":"44", "Fs7":"45", "Gb7":"45", "G7":"46", 
+					  "Gs7":"47", "Ab7":"47", "A7":"48", "As7":"49", "Bb7":"49",
+					  "B7":"4A", "C8":"4B", "Cs8":"4C", "Db8":"4C", "D8":"4D",
+					  "Ds8":"4E", "Eb8":"4E", "E8":"4F", "F8":"50", "Fs8":"51",
+					  "Gb8":"51", "G8":"52", "Gs8":"53", "Ab8":"53", "A8":"54",
+					  "As8":"55", "Bb8":"55", "B8":"56", "C9":"57", "Cs9":"58",
+					  "Db9":"58", "D9":"59", "Ds9":"5A", "Eb9":"5A", "E9":"5B",
+					  "F9":"5C", "Fs9":"5D"};
+		
+}
+
+// Initialize cartridge content
+// (prevents errors where empty cart
+// is loaded into emulator)
+loadCartridgeContent();
+
+
+// If user clicks on NESDownload button,
+// use downloadFile to download it!
+function downloadFile() {
+	NESCartridgeDownload.click();
+}
+
+// NesDownload button is in
+// NESMusicMaker. This should probably
+// be refactored in the future.
+NESDownload.onclick = function() {
+	loadCartridgeContent();
+	downloadFile();}
+} // End of continueInit()
+
+</script>
+
+<!-- JS is done loading, finish loading animation -->
+<script type="text/javascript" src="scripts/endLoad.js"></script>
+
+</html>
