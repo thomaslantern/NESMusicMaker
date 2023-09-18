@@ -1,0 +1,681 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: defaults,not dead,last 85 versions
+*/
+
+/* Eliminate padding and margin defaults for various browsers to make
+consistent looking pages */
+
+* {
+	margin: 0; 
+	padding: 0; 
+	font-weight: bold;
+	font-family: helvetica;
+	
+}
+
+                                                
+/* this css is a modified version of code provided by 
+www.javascriptfreecode.com coded by: Kerixa Inc.  (downloaded for use on this site on May 2, 2023)-->
+*/
+
+:root, html{
+ 
+ 
+  
+  
+}
+
+/* dark-mode theme */
+:root[data-theme = "dark-mode"]{
+  
+}
+
+
+/* button styles */
+button.toggle-mode{
+	position: fixed;
+	top: 14px;
+	left: 350px;
+  padding: 0;
+  width: 5rem;
+  
+  background-color: black;
+  -webkit-border-radius: 5em;
+          border-radius: 5em;
+  border: 0;
+}
+
+button.toggle-mode span {
+	position: relative;
+	left: -1.25rem;
+ /* background-color: red;*/
+  background-image: url("images/pixelsun.png");
+  -webkit-background-size: 2rem 2rem;
+       -o-background-size: 2rem 2rem;
+          background-size: 2rem 2rem;
+  display: inline-block;
+  width: 100px;
+  height: 10px;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  padding: 0.5rem;
+  border: 2px black solid;
+  color: black;
+
+}
+
+button.toggle-mode:hover{
+  cursor: pointer;
+
+}
+
+#toggler {
+	border-radius:  50%;
+}
+button.toggle-mode span{
+  position: relative;
+}
+
+
+/* dark-mode toggle animation classes */
+.darkmode-toggle{
+  -webkit-animation: darkmode_toggle;
+       -o-animation: darkmode_toggle;
+          animation: darkmode_toggle;
+  -webkit-animation-timing-function: ease-in-out;
+       -o-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+       -o-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.5s;
+       -o-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+
+@-webkit-keyframes darkmode_toggle{
+  0%{
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  100%{
+      
+    -webkit-transform: translateX(133%);
+      
+            transform: translateX(133%);
+
+  }
+}
+
+@-o-keyframes darkmode_toggle{
+  0%{
+    -o-transform: translateX(0%);
+       transform: translateX(0%);
+  }
+  100%{
+      
+    -o-transform: translateX(133%);
+      
+       transform: translateX(133%);
+
+  }
+}
+
+@keyframes darkmode_toggle{
+  0%{
+    -webkit-transform: translateX(0%);
+         -o-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+  100%{
+      
+    -webkit-transform: translateX(133%);
+      
+         -o-transform: translateX(133%);
+      
+            transform: translateX(133%);
+
+  }
+}
+
+.darkmode-toggle-normal{
+  -webkit-animation: darkmode_toggle_normal;
+       -o-animation: darkmode_toggle_normal;
+          animation: darkmode_toggle_normal;
+  -webkit-animation-timing-function: ease-in-out;
+       -o-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+       -o-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.5s;
+       -o-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+
+@-webkit-keyframes darkmode_toggle_normal{
+  0%{
+    -webkit-transform: translateX(133%);
+            transform: translateX(133%);
+  }
+  100%{  
+    -webkit-transform: translateX(0%);  
+            transform: translateX(0%);
+  }
+}
+
+@-o-keyframes darkmode_toggle_normal{
+  0%{
+    -o-transform: translateX(133%);
+       transform: translateX(133%);
+  }
+  100%{  
+    -o-transform: translateX(0%);  
+       transform: translateX(0%);
+  }
+}
+
+@keyframes darkmode_toggle_normal{
+  0%{
+    -webkit-transform: translateX(133%);
+         -o-transform: translateX(133%);
+            transform: translateX(133%);
+  }
+  100%{  
+    -webkit-transform: translateX(0%);  
+         -o-transform: translateX(0%);  
+            transform: translateX(0%);
+  }
+}
+
+
+body {
+	background: -webkit-gradient(linear, right top, left top, color-stop(15%, rgb(255,255,255)), color-stop(72%, #EDEDED));
+	background: -webkit-linear-gradient(right, rgb(255,255,255) 15%, #EDEDED 72%);
+	background: -o-linear-gradient(right, rgb(255,255,255) 15%, #EDEDED 72%);
+	background-color: #EDEDED;
+
+
+
+}
+
+
+/* Skipnav code and content courtesy of https://www.jimthatcher.com/skipnav.htm 
+which complies with: http://www.w3.org/TR/WCAG20/ 
+This is for users with screen readers who wish to skip the menu and go straight
+to the main content of each page */
+
+.skipnav { 
+	text-align: left; 
+	background-color:  red;
+}
+
+.skipnav a { 
+	position: absolute; 
+	left: -10000px; 
+	overflow: hidden; 
+}
+
+.skipnav a:focus, .skipnav a:active { 
+	position: static; 
+	left: 0; 
+	width: auto; 
+	height: auto; 
+	overflow: visible; 
+	text-decoration: underline;
+}
+
+
+/* Set up menu */
+
+.title {
+	position: fixed;
+	left: 130px;
+	top:  15px;
+	font-size: 1.5em;
+	font-family: inherit;
+	text-align: center;
+	color: black
+}
+
+
+.openmenu {
+	position:  fixed;
+	height:  60px;
+	background-color: rgb(215,215,215);
+	top: 0px;	
+	width:  100%;
+	-webkit-box-shadow: 0.3em 0.1em 0.1em #121212;
+	        box-shadow: 0.3em 0.1em 0.1em #121212;
+}
+
+.openmenu ul {
+	list-style-type: none; 
+	position:  static;
+	display:  block;
+	float: right;
+	padding-right: 0vw;
+	color: white;
+	width: auto;
+	padding: 20px;
+}
+
+.openmenu li {
+	float:  left;
+	text-decoration: none;
+	padding: 0 0.8vw;
+	color: black;
+}
+
+
+/* Make sure content starts after fixed menu */
+
+#maincontent {
+	margin-top:  60px;
+}
+
+
+/* Set up for various anchor text tags */
+
+a {
+	text-decoration:  none;
+}
+
+p a, input[type="submit"], td a {
+	text-decoration:  none;
+	display:  block;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	padding: 1em;
+	background-color: rgb(60,188,252);
+	-webkit-border-radius: 5px;
+	        border-radius: 5px;
+	margin: 1vw 0;
+	color: black;
+	cursor: pointer;
+}
+
+a.inline {
+	display: inline;
+	padding: 0.1vw;
+	color: black;
+	-webkit-border-radius: 0px;
+	        border-radius: 0px;
+	background-color: inherit;
+	text-decoration: underline;
+}
+
+li a, li a:visited, li a:active {
+	color: black
+}
+
+
+/* Set up for various tags */
+
+input[type="submit"]{
+	padding-bottom: 1.7em;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	font-size: 1.2em;
+	border-style: none;
+}
+
+
+img {
+	position: absolute;
+	top: 60px;
+	right: 0px;
+	z-index: -1;
+	width: 29%;
+	color: black;
+	border: none;
+}
+
+
+/* Custom img set up for logo in menu */
+
+#logo {
+	position: fixed;
+	top: 0px;
+	left: 30px;
+	width: auto;
+	float: left;
+	z-index: 0;
+}
+
+
+p, h2, h3, ul, ol, form, pre, code, table {
+	padding: 0.75em 3vw 0.75em 3vw;
+	width: 65%;
+	color: black;
+}
+
+h3 { padding-bottom: 0; }
+
+p {
+	padding: 0.5em 3vw 0.5em 3vw;
+	margin-bottom: 1em;
+}
+
+ul, ol {
+	padding: 0vw 3vw 1vw 5vw;
+}
+
+h1 {
+	padding: 1.5em 3vw 1em 3vw;
+	color: black;
+}
+
+
+code {
+	font-family: "Courier New";
+}
+
+
+input, textarea {
+	display: block;
+	width: 50%;
+	height: 2em;
+	background-color: rgb(215,215,215);
+	border-style: none;
+	padding: 0.2vw;
+}
+
+input[type="text"]:hover, textarea:hover {
+	background: rgb(182,182,182);
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;	
+}
+
+input[type="text"]:focus-within, textarea:focus-within {
+	background: white;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+	border: solid 1px rgb(60,188,252);
+	font-weight: bold;
+}
+ 
+textarea {
+	height: 7em;
+	resize: none;
+}
+
+
+table, tr, td {
+	margin-left: 1vw;
+	border: 1px solid black;
+	background-color: white;
+	padding: 0.5vw 1vw;
+}
+
+td a {
+	text-align: center;
+}
+
+
+/* Set up for various "spans" */
+.code, .branch, .cmd, .formula {
+	font-family:"courier new";
+	color: black;
+	background-color: rgb(255,178,0);
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	padding: 0 0.2vw;
+}
+
+.formula {
+	display: block;
+	font-size: 1.3em;
+}
+
+.important {
+	font-size: 1.6em;
+	color: var(--important-colour);
+	background-color: black;
+	display: block;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	padding: 0.3em;
+	margin-left:  -0.3em;
+}
+
+
+/* CSS for footer */
+
+.footer {
+	width: 100%;
+	display: -ms-grid;
+	display: grid;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	   -moz-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	background-color: var(--footer-bg);
+}
+
+.footer ul {
+	list-style-type: none;
+	width: 100%;
+}
+
+.footer li {
+	float: left;
+	padding: 2vw 1vw 0 0.5vw;
+}
+
+.footer p {
+	width: 100%;
+	display: -ms-grid;
+	display: grid;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	   -moz-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	padding: 0;
+}
+
+
+/* Responsive CSS breakouts for various widths */
+
+@media screen and (max-width: 1280px) {
+	.openmenu ul {
+		padding: 0;
+		position: fixed;
+		right: 0;
+		top: 0;
+	}
+
+	.openmenu a {
+		display: block;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+
+	.openmenu a.resources{
+		display: block;
+		padding-top: 0px;
+		padding-bottom: 0;
+		color: rgba(0,0,0,0);
+		width: 60px;
+		height: 60px;
+		background-image: url("../images/resources.png");
+		-webkit-background-size: 60px 60px;
+		     -o-background-size: 60px 60px;
+		        background-size: 60px 60px;
+		background-repeat: no-repeat;
+		text-align: center;
+	}
+}
+
+
+@media screen and (max-width: 1200px) {
+	.openmenu a.command{
+		display: block;
+		color: rgba(0,0,0,0);
+		width: 60px;
+		height: 60px;
+		background-image: url("../images/command.png");
+		-webkit-background-size: 60px 60px;
+		     -o-background-size: 60px 60px;
+		        background-size: 60px 60px;
+		background-repeat: no-repeat;
+		text-align: center;
+	}
+
+	h1#maincontent {
+		margin-top: 30px;
+	}
+}
+
+
+@media screen and (max-width: 1100px) {
+	.openmenu a.programs{
+		display: block;
+		padding-top: 0px;
+		padding-bottom: 0;
+		width: 60px;
+		height: 60px;
+		background-image: url("../images/programs.png");
+		-webkit-background-size: 60px 60px;
+		     -o-background-size: 60px 60px;
+		        background-size: 60px 60px;
+		background-repeat: no-repeat;
+		color: black;
+		text-align: center;
+		color: rgba(0,0,0,0);
+	}
+}
+
+
+@media screen and (max-width: 1060px) {
+	.openmenu a.coding{
+		display: block;
+		padding-top: 0px;
+		padding-bottom: 0;
+		width: 60px;
+		height: 60px;
+		background-image: url("../images/coding.png");
+		-webkit-background-size: 60px 60px;
+		     -o-background-size: 60px 60px;
+		        background-size: 60px 60px;
+		background-repeat: no-repeat;
+		color: black;
+		text-align: center;
+		color: rgba(0,0,0,0);
+	}
+}
+
+
+@media screen and (max-width: 990px) {
+	.openmenu a.hardware{
+		display: block;
+		padding-top: 0px;
+		padding-bottom: 0;
+		width: 60px;
+		height: 60px;
+		background-image: url("../images/hardware.png");
+		-webkit-background-size: 60px 60px;
+		     -o-background-size: 60px 60px;
+		        background-size: 60px 60px;
+		background-repeat: no-repeat;
+		color: black;
+		text-align: center;
+		color: rgba(0,0,0,0);
+	}
+}
+
+
+@media screen and (max-width: 870px) {
+	body {
+		margin-bottom: -webkit-calc(60px - 0.75vw);
+		margin-bottom: calc(60px - 0.75vw);
+	}
+
+	.openmenu ul {
+		position: fixed;
+		bottom: 0;
+		top: auto;
+		padding: 0 0 0 0.2em;
+		height: 60px;
+		width: 100%;
+		background-color: rgb(60,188,252);
+		display: -ms-grid;
+		display: grid;
+		-ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		justify-items: center;
+	}
+
+	.openmenu {
+		width: 100%;
+		background-color: rgb(215,215,215);	
+
+	}
+
+	.openmenu a.home {
+		display: block;
+		padding-top: 0px;
+		padding-bottom: 0;
+		width: 60px;
+		height: 60px;
+		background-image: url("../images/home.png");
+		-webkit-background-size: 60px 60px;
+		     -o-background-size: 60px 60px;
+		        background-size: 60px 60px;
+		background-repeat: no-repeat;
+		color: black;
+		text-align: center;
+		color: rgba(0,0,0,0);
+	}
+
+	button.toggle-mode {
+		top: 0;
+		right: 5px;
+		left: auto;
+		height: 35px;
+}
+
+
+	h1, h2, h3, p, ul, ol, img, table, td, tr {
+		width: 90%;
+	}
+
+	img {
+		position: static;
+		width: 90vw;
+		padding-left: 1em;
+	}
+
+	.openmenu, #logo {height: 40px}
+
+	#logo {
+		padding: 0;
+		left: 3vw;
+
+	}
+
+	.title {
+		top: 10px;
+		left: auto;
+		padding: 0;
+		width: 100%;
+		text-align: center;
+	}
+
+
+	.footer, .footer li, .footer ul {
+		height: 0;
+		background-color: none;
+	}
+}
