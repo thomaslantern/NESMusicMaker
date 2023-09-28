@@ -499,9 +499,8 @@ class Song {
 // Const variables for drawing:
 const defaultSongWidth = 500;
 const noteSpace = 15;
-// width of note itself
+//TO DO: name next two more clearly
 const noteWidth = 20;
-// width of note including gaps
 const totalNoteWidth = noteWidth * 1.5 + noteSpace;
 const noteHeight = 100;
 const cyOffset = noteWidth * 0.7;
@@ -517,15 +516,16 @@ const xOffset16th = 5;
 const yOffset16th = 15;
 const flagMultiplier = 20;
 
-// Const variables for various properties
+// Const variables for readability
 const canModifyNotes = true;
 const noModifyingNotes = false;
 const canHighlight = true;
 const noHighlighting = false;
+// TODO: make longer song length
+// (16 not adequate for most songs)
 const maxSongLength = 16;
 
 
-// Const variables for note lengths
 // Note: values based on a tempo of 60
 const wholeNoteLength = 240;
 const halfNoteLength = 120;
@@ -542,6 +542,8 @@ const eighthNote = new Note(eighthNoteLength, null);
 const sixteenthNote = new Note(sixteenthNoteLength, null);
 
 // Const variables for different kinds of rests:
+// TODO: consider using zero for pitch and find a way
+// to make that work (zero currently stops song in .asm file)
 const wholeRest = new Note(wholeNoteLength, "whole-rest");
 const halfRest = new Note(halfNoteLength, "half-rest");
 const quarterRest = new Note(quarterNoteLength, "quarter-rest");
@@ -556,7 +558,7 @@ const noteChoicesArray =
 sixteenthNote];
 
 
-// H1 element for Note Choices
+// h1 element for Note Choices
 const chooseNotesHere = document.createElement("h1");
 chooseNotesHere.innerHTML = "Choose from notes here:";
 
