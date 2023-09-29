@@ -2,9 +2,6 @@
 // NES Music Maker
 // ©2023 by Thomas Wesley Scott
 
-
-// entryPoint - the area in the page where the
-// JavaScript begins 
 const entryPoint = document.getElementById("javascript");
 
 
@@ -26,15 +23,13 @@ class Note {
 		// Declare the list of svg elements:
 		this.svgList = [];
 
-		// Switch case for different Notes:
+		// Determine length/type of note:
 		switch(duration) {
   			// Whole Note/Whole Rest
   			case wholeNoteLength:
 				// Check to see if note is actually a rest
 				if ((pitch != null) && (pitch.indexOf("rest")) >= 0) {
 					// Whole Rest
-  					// Build svg of note, set attributes,
-  					// push to svgList
   					const wholeRestSvg = document.createElementNS("http://www.w3.org/2000/svg", "rect")
   					wholeRestSvg.setAttribute("x", 265);
   					wholeRestSvg.setAttribute("y", 395);
@@ -53,8 +48,6 @@ class Note {
   					this.svgList.push(wholeRestLine);
   				} else {
   					// Whole Note
-  					// Build svg of note, set attributes,
-  					// push to svgList
 		  			const wholeNoteSvg = document.createElementNS("http://www.w3.org/2000/svg", "ellipse"); 
 					wholeNoteSvg.setAttribute("cx", 45);
 					wholeNoteSvg.setAttribute("cy", 400); 
