@@ -276,7 +276,7 @@ class Song {
 		this.musicStaff.setAttribute("id", id);
 		// Height/Width of music staff will be different depending on
 		// whether it can be modified (an actual customizable Song)
-		// vs not (a list of notes to use like a palette for a song)
+		// .vs. not (a list of notes to use like a palette for a song)
 		let currentWidth = defaultSongWidth;
 		if (canBeModified == true) {
 			this.musicStaff.setAttribute("height", modifiableSongHeight);
@@ -525,6 +525,7 @@ const xOffset16th = 5;
 const yOffset16th = 15;
 const flagMultiplier = 20;
 
+
 // Const variables for various properties
 // Mostly just makes object declarations more
 // readable without having to scroll back
@@ -656,8 +657,6 @@ entryPoint.appendChild(codeForNES);
 entryPoint.appendChild(resetButton);
 entryPoint.appendChild(NESDownload);
 entryPoint.appendChild(clipboardCopy);
-
-
 
 
 // FUNCTIONS:
@@ -894,16 +893,6 @@ function drawSetup() {
 	}
 }
 
-// showEmulator: show Takahirox's emulator
-// and place it underneath NESMusicMaker
-// (added for Unit 7 modifications)
-// This was the easiest way to place
-// this where I wanted without rewriting
-// a bunch of html and JS
-
-function showEmulator(){
-	entryPoint.appendChild(emu);
-}
 
 // drawNote: draws a note in 
 // targetSong from a note at index
