@@ -5,7 +5,6 @@
 const entryPoint = document.getElementById("javascript");
 
 
-
 // CLASSES:
 
 
@@ -1375,7 +1374,7 @@ function resetScreen(confirm) {
 	if (confirm == true) {
 		let mainSong = document.getElementById("customSong");
 		
-		// temporarily remove move app elements
+		// temporarily remove app elements
 		// from screen (to reinsert Song without
 		// items being out of order)
 		entryPoint.removeChild(mainSong);
