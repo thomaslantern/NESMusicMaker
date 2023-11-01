@@ -19,7 +19,7 @@ class Note {
 	constructor(duration, pitch) {
 		this.duration = duration;
 		this.pitch = pitch;
-		// Declare the list of svg elements:
+		// Declare the listahjfkh of svg elements:
 		this.svgList = [];
 
 		// Determine length/type of note:
@@ -1280,7 +1280,14 @@ function updateCode() {
 		if (currentIndex % 9 == 0) {
 			codeUpdate += "\n\tdb ";
 		}
-		codeUpdate += customSongPitchArray[i] + " ";
+		codeUpdate += customSongPitchArray[i]
+		// Make sure not to add commas after last
+		// note on any line:
+		if (((i + 1) != customSongPitchArray.length)
+			&& (currentIndex % 8 != 0)) {
+			codeUpdate += ",";
+
+		}
 		currentIndex += 1;
 	}
 
@@ -1301,7 +1308,8 @@ function updateCode() {
 		// modification. However, ASM6502 only deals with
 		// integers, so we parse whatever current values
 		// are in the array into a form that the NES can use:
-		codeUpdate += parseInt(customSongDurationArray[i]) + " ";
+		codeUpdate += parseInt(customSongDurationArray[i]);
+		if (currentIndex % 8 != 0) codeUpdate += ",";
 		currentIndex += 1;
 	}
 	// Update textarea's innerHTML:
