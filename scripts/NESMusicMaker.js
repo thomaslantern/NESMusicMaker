@@ -629,7 +629,9 @@ resetButton.type = "submit";
 resetButton.style.margin = "20px";
 resetButton.value = "Reset Notes";
 resetButton.style.width = "fit-content";
+resetButton.style.paddingBottom = "35px";
 resetButton.onclick = confirmReset;
+
 
 // clipboardCopy - button that allows user to
 // copy code from codeForNES to the clipboard
@@ -637,6 +639,9 @@ const clipboardCopy = document.createElement("input");
 clipboardCopy.type = "submit";
 clipboardCopy.style.margin = "20px";
 clipboardCopy.value = "Copy Text";
+clipboardCopy.style.width = "fit-content";
+clipboardCopy.style.paddingBottom = "35px";
+
 clipboardCopy.onclick = copyCodeToClipboard;
 
 // downloadNesFile - allows download into
@@ -645,6 +650,7 @@ const NESDownload = document.createElement("input");
 NESDownload.type = "submit";
 NESDownload.style.margin = "20px";
 NESDownload.style.width = "fit-content";
+NESDownload.style.paddingBottom = "35px";
 NESDownload.value = "Download Cartridge";
 
 
