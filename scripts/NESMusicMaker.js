@@ -272,6 +272,7 @@ class Song {
 		// Build the music staff
 		let startOffset = 0;
 		this.musicStaff = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		this.musicStaff.setAttribute("style", "margin-left: 2vw");
 		this.musicStaff.setAttribute("id", id);
 		// Height/Width of music staff will be different depending on
 		// whether it can be modified (an actual customizable Song)
@@ -599,6 +600,7 @@ let customSongDurationArray = [];
 const codeForNES = document.createElement("textarea");
 codeForNES.innerHTML = "(Code to paste in will appear here.)";
 codeForNES.readOnly = true;
+codeForNES.style.marginLeft = "2vw";
 
 
 // H1 element for tempo input:
@@ -610,8 +612,10 @@ tempoH1.innerHTML = "Input Valid Tempo (40-255) here:"
 // (affects duration of notes in NES code)
 let tempo = document.createElement("input");
 tempo.value = 120;
+tempo.style.marginLeft = "2vw";
 // Changing the tempo requires updating ASM6502 code:
 tempo.addEventListener("change", updateTempo);
+
 
 // We need somewhere to store the old tempo to know
 // how to update each note's duration
@@ -624,6 +628,7 @@ const resetButton = document.createElement("input");
 resetButton.type = "submit";
 resetButton.style.margin = "20px";
 resetButton.value = "Reset Notes";
+resetButton.style.width = "fit-content";
 resetButton.onclick = confirmReset;
 
 // clipboardCopy - button that allows user to
