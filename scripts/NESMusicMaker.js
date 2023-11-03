@@ -1319,7 +1319,10 @@ function updateCode() {
 		// integers, so we parse whatever current values
 		// are in the array into a form that the NES can use:
 		codeUpdate += parseInt(customSongDurationArray[i]);
-		if (currentIndex % 8 != 0) codeUpdate += ",";
+		if (((i + 1) != customSongDurationArray.length)
+			&& (currentIndex % 8 != 0)) {
+			codeUpdate += ",";
+		}
 		currentIndex += 1;
 	}
 	// Update textarea's innerHTML:
