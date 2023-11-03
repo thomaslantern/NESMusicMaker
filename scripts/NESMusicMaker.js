@@ -641,7 +641,6 @@ clipboardCopy.style.margin = "20px";
 clipboardCopy.value = "Copy Text";
 clipboardCopy.style.width = "fit-content";
 clipboardCopy.style.paddingBottom = "35px";
-
 clipboardCopy.onclick = copyCodeToClipboard;
 
 // downloadNesFile - allows download into
