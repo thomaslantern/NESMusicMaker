@@ -655,7 +655,7 @@ NESDownload.value = "Download Cartridge";
 
 
 
-// Append all elements to our entryPoint:
+// Append elements to our entryPoint:
 entryPoint.appendChild(tempoH1);
 entryPoint.appendChild(tempo);
 entryPoint.appendChild(chooseNotesHere);
