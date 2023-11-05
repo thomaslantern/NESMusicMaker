@@ -35,12 +35,6 @@
 	based on changes user has made in NESMusicMaker -->
 <script>
 
-/* JSON NOTES HERE:
-
-The JSON works now! Fixed since Unit 7
-
-*/
-
 // These numbers are slightly magical but 
 // are to facilitate JSON into .NES cartridge!
 const tweakHex = 1; // section where we need to modify one hexCode
@@ -57,8 +51,6 @@ let NESCartridgeFile;
 
 
 
-// courtesy of https://www.youtube.com/shorts/lBXm1n2gq-Q
-// (modified to meet my ends, obviously!)
 fetch("./json/musicInfo.json")
 .then(response => response.json())
 .then(data => showInfo(data));
